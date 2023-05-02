@@ -1,11 +1,20 @@
 # CSRAM qemu plugin
 
-This is a qemu plugin which emulate C-SRAM (Computing SRAM) functionnal
-behaviour and allow to evaluate full application performance.
+This is a QEMU plugin which emulates the Computational SRAM (C-SRAM).
 
-It contains instructions count per categories (Memory access
-instruction, scalar instructions, vector instructions) for RISCV
-and RISCV with a CSRAM compagnon accelerator
+C-SRAM is a domain-specific near-memory computing architecture grouping a subset of energy-optimized operations.
+This near-memory computing architecture allows an optimized coupling between SRAM and vector-ALU based on a custom ISA requiring a specific programming.
+Thus, the C-SRAM could be used as a programmable vector processing unit driven by the host scalar processor and as a low-latency SRAM (e.g. TCM or scratchpad) the rest of the time.
+This privileged mode of use drastically reduces energy consumption by minimizing the data movement (limited number of Load/Store) as well as the code size.
+
+
+It emulates the functional
+behavior of the C-SRAM and allows to evaluate full application performance.
+
+
+It contains instructions count per categories (memory access
+instructions, scalar instructions, vector instructions) for RISCV-based system
+and a system with a C-SRAM and RISCV processor
 
 ## How to build and install
 
@@ -25,24 +34,24 @@ qemu-riscv32 -plugin ./libCxRAM-qemu-plugin.so CxRAM-SimpleAdd 1 2 3 4 5 6 7 8 9
 
 ## How to use
 
-Qemu can use a plugin with two flavors : 
+QEMU can use a plugin with two flavors : 
 
 * With a `-plugin ./libCxRAM-qemu-plugin.so` flag
 * With the `QEMU_PLUGIN` shell environment variable containing the
   full file name of the plugin. The later is used in the HybroGen
-  environment. 
+  environment available here: https://github.com/CEA-LIST/HybroGen. 
 
 ## Get Report, Trace and Verbose 
 
 ### Report
-Using the environment variable `QEMU_CXRAM_REPORT` will generate a performance report `perf_report.csv` with nb ops, latancy and energy used by the system.
+Using the environment variable `QEMU_CXRAM_REPORT`, it will generate a performance report `perf_report.csv` with nb ops, latancy and energy used by the system.
 
 Activate this functionality with `export QEMU_CXRAM_REPORT="yes"` and desactivate it with `unset QEMU_CXRAM_REPORT`
 
-**/!\\ This model is completely artificial and does not reflect the performance of any C-SRAM circuit**
+**/!\\ The performance and energy model available online is completely artificial and does not reflect the performance of any C-SRAM circuit**
 
 ### Trace 
-Using the environment variable `QEMU_CXRAM_TRACE` will show all executed C-SRAM instructions and the data in memory before and after the execution of instructions: 
+Using the environment variable `QEMU_CXRAM_TRACE`, it will show all executed C-SRAM instructions and the data in memory before and after the execution of instructions: 
 
 ```shell
 in1:  1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 
@@ -55,7 +64,7 @@ res: 43  43  43  43  43  43  43  43  43  43  43  43  43  43  43  43
 Activate this functionality with `export QEMU_CXRAM_TRACE="yes"` and desactivate it with `unset QEMU_CXRAM_TRACE`
 
 ### Verbose 
-Using the environment variable `QEMU_CXRAM_VERBOSE` will show all plugin funcion call. 
+Using the environment variable `QEMU_CXRAM_VERBOSE`, it will show all plugin function call. 
 
 Activate this functionality with `export QEMU_CXRAM_TRACE="yes"` and desactivate with `unset QEMU_CXRAM_TRACE`
 
