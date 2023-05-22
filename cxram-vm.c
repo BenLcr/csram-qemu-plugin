@@ -382,6 +382,11 @@ switch (opcode)
   for (i = 0; i < 4; i++) 
     dest->i32[i] +=  (src1->i32[i]  * src2->i32[i]);
   break;
+  case OP__cm_mod32:
+  if (cxram_trace) printf ("Decode CxRAM operation _cm_mod32\n");
+  for (i = 0; i < 4; i++) 
+    dest->i32[i]  =  (src1->i32[i]  % src2->i32[i]);
+  break;
   default: printf ("Unknown opcode 0x%x (0x%x)\n", opcode >> 3, opcode & 0x7);
   exit(-1);
   break;
