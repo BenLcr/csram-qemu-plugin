@@ -31,7 +31,8 @@ uint32_t cxram_emulate(uint64_t cxram_insn, h2_cxram_array_t h2_cxram_tiles, h2_
     break;
    case OP__cm_copy:   case OP__cm_hswap32:   case OP__cm_hswap64:   case OP__cm_slli8:   case OP__cm_slli16:
    case OP__cm_slli32:   case OP__cm_srli8:   case OP__cm_srli16:   case OP__cm_srli32:   case OP__cm_not:
-   case OP__cm_redor:   case OP__cm_abs8:   case OP__cm_abs16:   case OP__cm_abs32:
+   case OP__cm_redor:   case OP__cm_abs8:   case OP__cm_abs16:   case OP__cm_abs32:	case OP__cm_mod32:
+   case OP__cm_mod16:   case OP__cm_mod8:
     imm8 = (cxram_insn >> 16) & 0xFF;
     imm16 = (cxram_insn >> 16) & 0xFFFF;
     imm32 = (cxram_insn >> 16) & 0xFFFFFFFF;
@@ -381,6 +382,21 @@ switch (opcode)
   if (cxram_trace) printf ("Decode CxRAM operation _cm_fmac32\n");
   for (i = 0; i < 4; i++) 
     dest->i32[i] +=  (src1->i32[i]  * src2->i32[i]);
+  break;
+  case OP__cm_mod8:
+  if (cxram_trace) printf ("Decode CxRAM operation _cm_mod32\n");
+  for (i = 0; i < 16; i++) 
+    dest->i8[i]  =  (src1->i8[i]  % src2->i8[i]);
+  break;
+  case OP__cm_mod16:
+  if (cxram_trace) printf ("Decode CxRAM operation _cm_mod32\n");
+  for (i = 0; i < 8; i++) 
+    dest->i16[i]  =  (src1->i16[i]  % src2->i16[i]);
+  break;
+  case OP__cm_mod32:
+  if (cxram_trace) printf ("Decode CxRAM operation _cm_mod32\n");
+  for (i = 0; i < 4; i++) 
+    dest->i32[i]  =  (src1->i32[i]  % src2->i32[i]);
   break;
   default: printf ("Unknown opcode 0x%x (0x%x)\n", opcode >> 3, opcode & 0x7);
   exit(-1);

@@ -96,6 +96,9 @@ enum CXRAMOPCODES {
   OP__cm_fmac8 = 0x3C,
   OP__cm_fmac16 = 0x7C,
   OP__cm_fmac32 = 0xBC,
+  OP__cm_mod8 = 100,
+  OP__cm_mod16 = 101,
+  OP__cm_mod32 = 102,
 };
 enum CMP_FLAG {CMP_FLAG_GT = 1, CMP_FLAG_LT = 2,  CMP_FLAG_EQ = 4, CMP_FLAG_GEQ = 5, CMP_FLAG_LEQ = 6};
 enum CMP_SHAM {CMP_SHAM_GT = 1, CMP_SHAM_LT = 2,  CMP_SHAM_EQ = 4};
