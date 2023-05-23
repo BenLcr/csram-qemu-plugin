@@ -384,12 +384,12 @@ switch (opcode)
     dest->i32[i] +=  (src1->i32[i]  * src2->i32[i]);
   break;
   case OP__cm_mod8:
-  if (cxram_trace) printf ("Decode CxRAM operation _cm_mod32\n");
+  if (cxram_trace) printf ("Decode CxRAM operation _cm_mod8\n");
   for (i = 0; i < 16; i++) 
     dest->i8[i]  =  (src1->i8[i]  % src2->i8[i]);
   break;
   case OP__cm_mod16:
-  if (cxram_trace) printf ("Decode CxRAM operation _cm_mod32\n");
+  if (cxram_trace) printf ("Decode CxRAM operation _cm_mod16\n");
   for (i = 0; i < 8; i++) 
     dest->i16[i]  =  (src1->i16[i]  % src2->i16[i]);
   break;
@@ -410,19 +410,19 @@ uint32_t getWordSize(uint32_t cxram_opcode)
    case OP__cm_copyeq8:   case OP__cm_copygeq8:   case OP__cm_copygt8:   case OP__cm_copyleq8:   case OP__cm_copylt8:
    case OP__cm_copyneq8:   case OP__cm_bcast8:   case OP__cm_slli8:   case OP__cm_srli8:   case OP__cm_abs8:
    case OP__cm_adds8:   case OP__cm_add8:   case OP__cm_sub8:   case OP__cm_subs8:   case OP__cm_cmp8:
-   case OP__cm_mul8:   case OP__cm_fmac8:
+   case OP__cm_mul8:   case OP__cm_fmac8:   case OP__cm_mod8:
     return 8;
     break;
    case OP__cm_copyeq16:   case OP__cm_copygeq16:   case OP__cm_copygt16:   case OP__cm_copyleq16:   case OP__cm_copylt16:
    case OP__cm_copyneq16:   case OP__cm_bcast16:   case OP__cm_slli16:   case OP__cm_srli16:   case OP__cm_abs16:
    case OP__cm_adds16:   case OP__cm_add16:   case OP__cm_sub16:   case OP__cm_subs16:   case OP__cm_cmp16:
-   case OP__cm_mul16:   case OP__cm_fmac16:
+   case OP__cm_mul16:   case OP__cm_fmac16:   case OP__cm_mod16:
     return 16;
     break;
    case OP__cm_hswap32:   case OP__cm_copyeq32:   case OP__cm_copygeq32:   case OP__cm_copygt32:   case OP__cm_copyleq32:
    case OP__cm_copylt32:   case OP__cm_copyneq32:   case OP__cm_bcast32:   case OP__cm_slli32:   case OP__cm_srli32:
    case OP__cm_abs32:   case OP__cm_adds32:   case OP__cm_add32:   case OP__cm_sub32:   case OP__cm_subs32:
-   case OP__cm_cmp32:   case OP__cm_mul32:   case OP__cm_fmac32:
+   case OP__cm_cmp32:   case OP__cm_mul32:   case OP__cm_fmac32:   case OP__cm_mod32:
     return 32;
     break;
   default:
