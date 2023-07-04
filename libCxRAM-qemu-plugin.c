@@ -54,9 +54,9 @@ void trace(char *msg)
 }
 
 void print_perf(FILE* file, char* name, int nb_ops, int indice, int *TOTAL){
-	fprintf(file,"%s_NB_OPS;%d\n",name , nb_ops);
-	fprintf(file,"%s_NB_CYCLES;%d\n",name , nb_ops * latency[indice]);
-	fprintf(file,"%s_ENERGY;%d\n",name , nb_ops * energy[indice]);
+	fprintf(file,"%s_NB_OPS;%ld\n",name , nb_ops);
+	fprintf(file,"%s_NB_CYCLES;%ld\n",name , nb_ops * latency[indice]);
+	fprintf(file,"%s_ENERGY;%ld\n",name , nb_ops * energy[indice]);
 	TOTAL[0] += nb_ops;
 	TOTAL[1] += nb_ops * latency[indice];
 	TOTAL[2] += nb_ops * energy[indice];
